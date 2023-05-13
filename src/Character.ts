@@ -19,11 +19,15 @@ export class Character {
     return true
   }
 
-  dealDamage(character: Character, damageDealt: number) {
-    character.health = Math.max(character.health - damageDealt, 0)
+  dealDamage(character: Character, damageAmount: number) {
+    character.health = Math.max(character.health - damageAmount, 0)
   }
 
   isDead() {
     return !this.isAlive()
+  }
+
+  heal(character: Character, healingAmount: number) {
+    character.health += healingAmount
   }
 }

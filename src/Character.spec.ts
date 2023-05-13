@@ -80,4 +80,17 @@ describe("Character", () => {
       expect(character.hasHealth(0)).toBe(true)
     })
   })
+
+  describe("heals", () => {
+    it("another character", () => {
+      const anotherCharacter = Character.spawn()
+      const healer = Character.spawn()
+      const attacker = Character.spawn()
+      attacker.dealDamage(anotherCharacter, 300)
+
+      healer.heal(anotherCharacter, 100)
+
+      expect(anotherCharacter.hasHealth(800)).toBe(true)
+    })
+  })
 })
