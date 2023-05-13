@@ -39,8 +39,8 @@ describe("Character", () => {
     })
   })
 
-  describe("dealing damage", () => {
-    it("deals damage to other character", () => {
+  describe("deals damage", () => {
+    it("to other character", () => {
       const character = Character.spawn()
       const attacker = Character.spawn()
 
@@ -49,8 +49,10 @@ describe("Character", () => {
 
       expect(character.hasHealth(800)).toBe(true)
     })
+  })
 
-    it("is dead when receiving enough damage", () => {
+  describe("receives damage", () => {
+    it("enough to be dead", () => {
       const character = Character.spawn()
       const attacker = Character.spawn()
 
@@ -59,7 +61,7 @@ describe("Character", () => {
       expect(character.isDead()).toBe(true)
     })
 
-    it("never has health below zero", () => {
+    it("but never having health below zero", () => {
       const character = Character.spawn()
       const attacker = Character.spawn()
 
