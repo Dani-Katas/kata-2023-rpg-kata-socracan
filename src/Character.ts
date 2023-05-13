@@ -29,6 +29,9 @@ export class Character {
   }
 
   heal(character: Character, healingAmount: number) {
+    if (character.isDead()) {
+      return
+    }
     character.health = Math.min(character.health + healingAmount, Character.MAXIMUM_HEALTH)
   }
 }
