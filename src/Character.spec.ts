@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+import { test, fc } from "@fast-check/vitest"
 import { Character } from "./Character.js"
 
 /**
@@ -48,6 +49,15 @@ describe("Character", () => {
       attacker.dealDamage(character, damageDealt)
 
       expect(character.hasHealth(800)).toBe(true)
+    })
+
+    test.prop([fc.integer({ min: 1, max: 1000 })])("health decreases within range of damage dealt", (damageDealt) => {
+      const character = Character.spawn()
+      const attacker = Character.spawn()
+
+      attacker.dealDamage(character, damageDealt)
+
+      expect(character.hasHealth(1000 - damageDealt)).toBe(true)
     })
   })
 
