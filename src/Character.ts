@@ -28,6 +28,6 @@ export class Character {
   }
 
   heal(character: Character, healingAmount: number) {
-    character.health += healingAmount
+    character.health = Math.min(character.health + healingAmount, 1000)
   }
 }

@@ -92,5 +92,14 @@ describe("Character", () => {
 
       expect(anotherCharacter.hasHealth(800)).toBe(true)
     })
+
+    test.prop([fc.integer({ min: 1 })])("heal does not exceed maximum health", (healAmount) => {
+      const character = Character.spawn()
+      const healer = Character.spawn()
+
+      healer.heal(character, healAmount)
+
+      expect(character.hasHealth(1000)).toBe(true)
+    })
   })
 })
