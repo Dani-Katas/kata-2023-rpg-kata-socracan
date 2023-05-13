@@ -1,0 +1,13 @@
+stages:
+  - test
+
+test:
+  stage: test
+  needs: []
+  image: node:18-alpine
+  except:
+    - schedules
+  script:
+    - npm ci
+    - npm run lint
+    - npm test
