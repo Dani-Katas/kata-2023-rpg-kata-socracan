@@ -51,7 +51,7 @@ describe("Character", () => {
       expect(character.hasHealth(800)).toBe(true)
     })
 
-    test.prop([fc.integer({ min: 1, max: 1000 })])("health decreases within range of damage dealt", (damageDealt) => {
+    test.prop([fc.integer({ min: 1, max: 1000 })])("damage never goes below zero", (damageDealt) => {
       const character = Character.spawn()
       const attacker = Character.spawn()
 
