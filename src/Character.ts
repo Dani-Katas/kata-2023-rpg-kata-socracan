@@ -1,5 +1,6 @@
 export class Character {
-  private health = 1000
+  private static readonly MAXIMUM_HEALTH = 1000
+  private health = Character.MAXIMUM_HEALTH
 
   static spawn() {
     return new Character()
@@ -28,6 +29,6 @@ export class Character {
   }
 
   heal(character: Character, healingAmount: number) {
-    character.health = Math.min(character.health + healingAmount, 1000)
+    character.health = Math.min(character.health + healingAmount, Character.MAXIMUM_HEALTH)
   }
 }
