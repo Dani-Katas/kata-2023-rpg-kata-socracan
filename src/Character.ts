@@ -1,5 +1,5 @@
 export class Character {
-  private health = 1000;
+  private health = 1000
 
   static spawn() {
     return new Character()
@@ -8,7 +8,7 @@ export class Character {
   private minimumHealth = 1
 
   isAlive() {
-    return this.health >= this.minimumHealth;
+    return this.health >= this.minimumHealth
   }
 
   hasHealth(health: number) {
