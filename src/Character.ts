@@ -5,8 +5,10 @@ export class Character {
     return new Character()
   }
 
+  private minimumHealth = 1
+
   isAlive() {
-    return true;
+    return this.health >= this.minimumHealth;
   }
 
   hasHealth(health: number) {
@@ -18,6 +20,10 @@ export class Character {
   }
 
   dealDamage(character: Character, damageDealt: number) {
-    character.health = character.health - damageDealt
+    character.health = Math.max(character.health - damageDealt, 0)
+  }
+
+  isDead() {
+    return !this.isAlive()
   }
 }

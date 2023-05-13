@@ -37,7 +37,7 @@ describe("Character", () => {
     expect(character.isLevel(initialLevel)).toBe(true)
   });
 
-  it("recieves damage", () => {
+  it("deals damage to other character", () => {
     const character = Character.spawn();
     const attacker = Character.spawn();
 
@@ -47,13 +47,21 @@ describe("Character", () => {
     expect(character.hasHealth(800)).toBe(true)
   });
 
-  // it("deals damage to another character", () => {
-  //   const character = Character.spawn();
-  //   const attacker = Character.spawn();
-  //
-  //   attacker.attack(character, 1000)
-  //
-  //   expect(character.hasHealth(0)).toBe(true)
-  //   expect(character.isDead()).toBe(true)
-  // });
+  it("is dead when receiving enough damage", () => {
+    const character = Character.spawn();
+    const attacker = Character.spawn();
+
+    attacker.dealDamage(character, 1000)
+
+    expect(character.isDead()).toBe(true)
+  });
+
+  it("never has health below zero", () => {
+    const character = Character.spawn();
+    const attacker = Character.spawn();
+
+    attacker.dealDamage(character, 1001)
+
+    expect(character.hasHealth(0)).toBe(true)
+  });
 });
