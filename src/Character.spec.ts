@@ -3,18 +3,13 @@ import { test, fc } from "@fast-check/vitest"
 import { Character } from "./Character.js"
 
 /**
- * 1. All Characters, when created, have:
- *     - ✅ Health, starting at 1000
- *     - ✅ Level, starting at 1
- *     - ✅ May be Alive or Dead, starting Alive (Alive may be a true/false)
+ * 1. ❌ A Character cannot Deal Damage to itself.
  *
- * 1. Characters can Deal Damage to Characters.
- *     - ✅ Damage is subtracted from Health
- *     - ✅ When damage received exceeds current Health, Health becomes 0 and the character dies
+ * 1. ❌ A Character can only Heal itself.
  *
- * 1. A Character can Heal a Character.
- *     - ✅ Dead characters cannot be healed
- *     - ✅ Healing cannot raise health above 1000
+ * 1. ❌ When dealing damage:
+ *     - If the target is 5 or more Levels above the attacker, Damage is reduced by 50%
+ *     - If the target is 5 or more Levels below the attacker, Damage is increased by 50%
  */
 
 describe("Character", () => {
@@ -91,6 +86,16 @@ describe("Character", () => {
       healer.heal(anotherCharacter, 100)
 
       expect(anotherCharacter.hasHealth(800)).toBe(true)
+    })
+
+    it("can heal itself", () => {
+      const healer = Character.spawn()
+      const attacker = Character.spawn()
+      attacker.dealDamage(healer, 300)
+
+      healer.heal(healer, 100)
+
+      expect(healer.hasHealth(800)).toBe(true)
     })
 
     test.prop([fc.integer({ min: 1 })])("heal does not exceed maximum health", (healAmount) => {
