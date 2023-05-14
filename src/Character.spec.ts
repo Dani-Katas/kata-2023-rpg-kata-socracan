@@ -13,8 +13,8 @@ import { Character } from "./Character.js"
  *     - ✅ When damage received exceeds current Health, Health becomes 0 and the character dies
  *
  * 1. A Character can Heal a Character.
- *     -  Dead characters cannot be healed
- *     -  Healing cannot raise health above 1000
+ *     - ✅ Dead characters cannot be healed
+ *     - ✅ Healing cannot raise health above 1000
  */
 
 describe("Character", () => {
