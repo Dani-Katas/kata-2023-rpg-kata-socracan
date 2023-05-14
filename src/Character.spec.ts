@@ -102,7 +102,7 @@ describe("Character", () => {
       expect(character.hasHealth(1000)).toBe(true)
     })
 
-    test.prop([fc.integer({ min: 1 })])("", (healAmount) => {
+    test.prop([fc.integer({ min: 1 })])("cannot be healed if is dead", (healAmount) => {
       const character = Character.spawn()
       const healer = Character.spawn()
       const attacker = Character.spawn()
