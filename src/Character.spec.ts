@@ -12,18 +12,6 @@ import { Character } from "./Character.js"
  *     - If the target is 5 or more Levels below the attacker, Damage is increased by 50%
  */
 
-class FixedLevelCharacter extends Character {
-  private level: number
-  constructor(level: number) {
-    super()
-    this.level = level
-  }
-
-  isLevel(initialLevel: number): boolean {
-    return initialLevel === this.level
-  }
-}
-
 describe("Character", () => {
   describe("spawning", () => {
     it("starts with full hp", () => {
@@ -67,9 +55,8 @@ describe("Character", () => {
     })
 
     it("deals 50% of the damage if the target is 5 or more levels above the attacker", () => {
-      const target = Character.spawn()
-      const attacker = Character.spawn()
-      target.setLevel(6)
+      const target = Character.with({ level: 6 })
+      const attacker = Character.with({ level: 1 })
 
       attacker.dealDamage(target, 200)
 

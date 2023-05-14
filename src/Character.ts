@@ -1,10 +1,18 @@
 export class Character {
   private static readonly MAXIMUM_HEALTH = 1000
   private health = Character.MAXIMUM_HEALTH
-  protected level: number = 1
+  private level: number
+
+  private constructor(level: number = 1) {
+    this.level = level
+  }
 
   static spawn() {
     return new Character()
+  }
+
+  static with({ level }: { level: number }) {
+    return new Character(level)
   }
 
   private minimumHealth = 1
