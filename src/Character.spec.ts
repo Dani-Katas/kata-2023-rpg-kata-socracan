@@ -77,17 +77,6 @@ describe("Character", () => {
   })
 
   describe("heals", () => {
-    it("another character", () => {
-      const anotherCharacter = Character.spawn()
-      const healer = Character.spawn()
-      const attacker = Character.spawn()
-      attacker.dealDamage(anotherCharacter, 300)
-
-      healer.heal(anotherCharacter, 100)
-
-      expect(anotherCharacter.hasHealth(800)).toBe(true)
-    })
-
     it("can heal itself", () => {
       const healer = Character.spawn()
       const attacker = Character.spawn()
@@ -96,6 +85,16 @@ describe("Character", () => {
       healer.heal(healer, 100)
 
       expect(healer.hasHealth(800)).toBe(true)
+    })
+
+    it("cannot heal another character", () => {
+      const target = Character.spawn()
+      const attacker = Character.spawn()
+      attacker.dealDamage(target, 300)
+
+      attacker.heal(target, 100)
+
+      expect(target.hasHealth(700)).toBe(true)
     })
 
     test.prop([fc.integer({ min: 1 })])("heal does not exceed maximum health", (healAmount) => {
