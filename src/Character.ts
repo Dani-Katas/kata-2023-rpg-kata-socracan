@@ -1,6 +1,7 @@
 export class Character {
   private static readonly MAXIMUM_HEALTH = 1000
   private health = Character.MAXIMUM_HEALTH
+  protected level: number = 1
 
   static spawn() {
     return new Character()
@@ -17,10 +18,21 @@ export class Character {
   }
 
   isLevel(initialLevel: number) {
-    return true
+    return this.level == initialLevel
+  }
+
+  setLevel(level: number) {
+    this.level = level
   }
 
   dealDamage(character: Character, damageAmount: number) {
+    if (character === this) {
+      return
+    }
+    if (character.level - this.level >= 5) {
+      damageAmount = damageAmount / 2
+    }
+
     character.health = Math.max(character.health - damageAmount, 0)
   }
 
@@ -28,15 +40,11 @@ export class Character {
     return !this.isAlive()
   }
 
-  heal(character: Character, healingAmount: number) {
-    if (character.isDead()) {
+  healSelf(healingAmount: number) {
+    if (this.isDead()) {
       return
     }
 
-    if (character !== this) {
-      return
-    }
-
-    character.health = Math.min(character.health + healingAmount, Character.MAXIMUM_HEALTH)
+    this.health = Math.min(this.health + healingAmount, Character.MAXIMUM_HEALTH)
   }
 }
